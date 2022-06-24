@@ -13,7 +13,7 @@ export default function Dashboard() {
                     </span>
                 </h1>
 
-                <p className="mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400">
+                <p className="mt-6 text-lg sm:text-base text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400">
                     Create a new document and select your usecase
                 </p>
                 <div className="mt-6 sm:mt-10 flex justify-center">
