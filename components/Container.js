@@ -45,11 +45,12 @@ export default function Container( {children} ) {
                 layout="fixed"
                 alt="Revampai logo"
                 src="/Revampai.svg"
+                
               />
             </div>
             <div
               
-              className=" dark:text-white text-gray-700 font-sans font-bold text-2xl tracking-tight"
+              className=" dark:text-white text-gray-700 font-sans font-bold text-2xl tracking-tight sm:hidden"
             >
               
               Revamp AI
@@ -89,7 +90,7 @@ export default function Container( {children} ) {
       <div className="drawer-side">
         <label htmlFor="side-drawer" className="drawer-overlay lg:hidden"></label>
         <div
-          className=" flex flex-col float-right h-screen min-w-max w-20
+          className=" flex flex-col float-right h-screen min-w-max w-16
                   bg-white dark:bg-base-300 shadow-lg"
         >
           <div className="tooltip-info tooltip" datatip="Dashboard">
