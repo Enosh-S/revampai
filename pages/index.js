@@ -1,5 +1,7 @@
 import Head from 'next/head'
-import Container from '../components/Container'
+
+
+import Dashboard from './dashboard'
 
 
 export default function Home() {
@@ -11,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <Container/>
+      <Dashboard/>
 
       
     </div>
