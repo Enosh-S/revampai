@@ -31,7 +31,7 @@ export default function Container( {children} ) {
         <div className="w-full navbar bg-base-100 dark:bg-base-300 h-16 justify-center bg-opacity-90 backdrop-blur transition-all duration-100 shadow-xl ">
           <div className="navbar-start">
             <label
-              for="side-drawer"
+              htmlFor="side-drawer"
               className="btn btn-circle btn-ghost dark:text-white text-gray-700 lg:hidden"
             >
               <RiMenu4Fill size="22" />
@@ -83,39 +83,39 @@ export default function Container( {children} ) {
             </button>
           </div>
         </div>
-        <div>{children}</div>
+        <div >{children}</div>
       </div>
       <div className="drawer-side">
-        <label for="side-drawer" className="drawer-overlay lg:hidden"></label>
+        <label htmlFor="side-drawer" className="drawer-overlay lg:hidden"></label>
         <div
           className=" flex flex-col float-right h-screen min-w-max w-20
                   bg-white dark:bg-base-300 shadow-lg"
         >
           <div className="tooltip-info tooltip" datatip="Dashboard">
-            <Link href="/">
+            <Link href="/" passHref>
              <a> <SidebarIcon icon={<RiLayout5Fill size="28" />} /> </a>
             </Link>
           </div>
           <Divider />
           <div className="flex flex-col space-y-1 mt-3 mb-auto">
-            <Link href="/newdoc">
+            <Link href="/newdoc" passHref>
               <div>
                <a> <SidebarIcon icon={<ImPilcrow size="27" />} /></a>
               </div>
             </Link>
-            <Link href="/docshistory">
+            <Link href="/docshistory" passHref>
               <div>
                 <a> <SidebarIcon icon={<RiFileTextFill size="28" />} /> </a>
               </div>
             </Link>
-            <Link href="/schedule">
+            <Link href="/schedule" passHref>
               <div>
                 <a> <SidebarIcon icon={<RiCalendarFill size="28" />} /> </a>
               </div>
             </Link>
           </div>
           <div className="flex flex-col mb-3 space-y-2 mt-auto">
-            <Link href="/pricing">
+            <Link href="/pricing" passHref>
               <div>
               <a> <SidebarIcon icon={<RiVipDiamondFill size="28" />} /> </a>
                 

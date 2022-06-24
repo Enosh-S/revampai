@@ -4,7 +4,7 @@ import { ImPilcrow } from "react-icons/im";
 export default function Dashboard() {
     return (
         <div>
-        <div className="px-4 sm-px-6 md:px-8 dark:bg-base-200 shadow-inner-xl">
+        <div className="px-4 sm-px-6 md:px-8 dark:bg-neutral shadow-inner-xl">
             <div className="relative max-w-5xl mx-auto py-20 ">
                 <h1 className="text-slate-900 font-extrabold text-4xl sm:text-5xl lg-text-6xl tracking-tight text-center dark:text-white">
                     Revamp your
