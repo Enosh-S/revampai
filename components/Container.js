@@ -8,8 +8,8 @@ import {
 } from "react-icons/ri";
 import { ImPilcrow } from "react-icons/im";
 import Image from "next/image";
+import Link from "next/link";
 
-import { useState } from "react";
 
 
 export default function Container( {children} ) {
@@ -92,35 +92,35 @@ export default function Container( {children} ) {
                   bg-white dark:bg-base-300 shadow-lg"
         >
           <div className="tooltip-info tooltip" datatip="Dashboard">
-            <a href="/dashboard">
-              <SidebarIcon icon={<RiLayout5Fill size="28" />} />
-            </a>
+            <Link href="/">
+             <a> <SidebarIcon icon={<RiLayout5Fill size="28" />} /> </a>
+            </Link>
           </div>
           <Divider />
           <div className="flex flex-col space-y-1 mt-3 mb-auto">
-            <a href="/newdoc">
+            <Link href="/newdoc">
               <div>
-                <SidebarIcon icon={<ImPilcrow size="27" />} />
+               <a> <SidebarIcon icon={<ImPilcrow size="27" />} /></a>
               </div>
-            </a>
-            <a href="/docshistory">
+            </Link>
+            <Link href="/docshistory">
               <div>
-                <SidebarIcon icon={<RiFileTextFill size="28" />} />
+                <a> <SidebarIcon icon={<RiFileTextFill size="28" />} /> </a>
               </div>
-            </a>
-            <a href="/schedule">
+            </Link>
+            <Link href="/schedule">
               <div>
-                <SidebarIcon icon={<RiCalendarFill size="28" />} />
+                <a> <SidebarIcon icon={<RiCalendarFill size="28" />} /> </a>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col mb-3 space-y-2 mt-auto">
-            <a href="/pricing">
+            <Link href="/pricing">
               <div>
-              <SidebarIcon icon={<RiVipDiamondFill size="28" />} />
+              <a> <SidebarIcon icon={<RiVipDiamondFill size="28" />} /> </a>
                 
               </div>
-            </a>
+            </Link>
             <div className="avatar cursor-pointer ">
               <div className="w-10 mx-auto rounded-full ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
                

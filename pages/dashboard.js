@@ -17,12 +17,14 @@ export default function Dashboard() {
                     Create a new document and select your usecase
                 </p>
                 <div className="mt-6 sm:mt-10 flex justify-center">
-                    <a href="/newdoc">
+                    <Link href="/newdoc">
+                        <a>
                         <button className="btn btn-primary gap-2 text-slate-100 text-base font-sans capitalize">
                             <ImPilcrow size={15} />
                             New Document
                         </button>
-                    </a>
+                        </a>
+                    </Link>
 
                 </div>
 
