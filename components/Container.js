@@ -38,7 +38,7 @@ export default function Container( {children} ) {
             </label>
           </div>
           <div className="navbar-center">
-            <div className="mx-1">
+            <div className="mx-1 min-w-max ">
               <Image
                 width={45}
                 height={45}
@@ -48,13 +48,7 @@ export default function Container( {children} ) {
                 
               />
             </div>
-            <div
-              
-              className=" dark:text-white text-gray-700 font-sans font-bold text-2xl tracking-tight sm:hidden"
-            >
-              
-              Revamp AI
-            </div>
+            
           </div>
           <div className="navbar-end">
             <div>
