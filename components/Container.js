@@ -43,6 +43,7 @@ export default function Container( {children} ) {
                 width={45}
                 height={45}
                 layout="fixed"
+                alt="Revampai logo"
                 src="/Revampai.svg"
               />
             </div>
