@@ -8,7 +8,7 @@ import {
 } from "react-icons/ri";
 import { ImPilcrow } from "react-icons/im";
 import Image from "next/image";
-import Link from "next/link";
+
 import { useState } from "react";
 
 
@@ -92,35 +92,35 @@ export default function Container( {children} ) {
                   bg-white dark:bg-base-300 shadow-lg"
         >
           <div className="tooltip-info tooltip" datatip="Dashboard">
-            <Link href="/dashboard">
+            <a href="/dashboard">
               <SidebarIcon icon={<RiLayout5Fill size="28" />} />
-            </Link>
+            </a>
           </div>
           <Divider />
           <div className="flex flex-col space-y-1 mt-3 mb-auto">
-            <Link href="/newdoc">
+            <a href="/newdoc">
               <div>
                 <SidebarIcon icon={<ImPilcrow size="27" />} />
               </div>
-            </Link>
-            <Link href="/docshistory">
+            </a>
+            <a href="/docshistory">
               <div>
                 <SidebarIcon icon={<RiFileTextFill size="28" />} />
               </div>
-            </Link>
-            <Link href="/schedule">
+            </a>
+            <a href="/schedule">
               <div>
                 <SidebarIcon icon={<RiCalendarFill size="28" />} />
               </div>
-            </Link>
+            </a>
           </div>
           <div className="flex flex-col mb-3 space-y-2 mt-auto">
-            <Link href="/pricing">
+            <a href="/pricing">
               <div>
               <SidebarIcon icon={<RiVipDiamondFill size="28" />} />
                 
               </div>
-            </Link>
+            </a>
             <div className="avatar cursor-pointer ">
               <div className="w-10 mx-auto rounded-full ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
                
