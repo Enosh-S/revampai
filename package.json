@@ -8,10 +8,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
+    "@next-auth/firebase-adapter": "^0.1.2-pr.183-76202b42.8",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/typography": "^0.5.2",
     "daisyui": "^2.17.0",
+    "firebase": "^9.8.4",
     "next": "12.1.4",
+    "next-auth": "^4.6.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-icons": "^4.4.0"

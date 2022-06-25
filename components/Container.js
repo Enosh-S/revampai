@@ -4,15 +4,24 @@ import {
   RiCalendarFill,
   RiVipDiamondFill,
   RiMenu4Fill,
-  RiNotification3Line,
+  
 } from "react-icons/ri";
+import { FiLogOut } from "react-icons/fi";
 import { ImPilcrow } from "react-icons/im";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+
+
+
 
 
 
 export default function Container( {children} ) {
+
+  const {data: session} = useSession();
+
   const SidebarIcon = ({ icon, text = "tooltip" }) => (
     <div className="sidebar-icon">
       {icon}
@@ -20,6 +29,8 @@ export default function Container( {children} ) {
     </div>
   );
   const Divider = () => <hr className="sidebar-hr" />;
+  const router = useRouter();
+ 
   
 
   
@@ -70,13 +81,29 @@ export default function Container( {children} ) {
                 </svg>
               </label>
             </div>
+            {!session && (
+              <div>
+              <button
+               className="  text-neutral mx-2 btn-sm btn-primary rounded-md text-sm font-semibold tracking-tight  "
+               onClick={signIn
+                // () => router.push("/signin")
+                }
+               >
+              Sign in
 
-            <button className="btn btn-ghost btn-circle dark:text-white text-gray-700">
-              <div className="indicator">
-                <RiNotification3Line size="20" />
-                <span className="badge badge-xs badge-secondary indicator-item"></span>
-              </div>
-            </button>
+              </button>
+            </div>
+            )}
+            {session && (
+              <label
+              className="btn btn-circle btn-ghost dark:text-white text-gray-700"
+              onClick={signOut}
+            >
+              <FiLogOut size="22"  />
+            </label>
+            )}
+
+            
           </div>
         </div>
         <div >{children}</div>
@@ -117,11 +144,19 @@ export default function Container( {children} ) {
                 
               </div>
             </Link>
-            <div className="avatar cursor-pointer ">
+            {!session && (
+              <div />
+            )}
+            {session && (
+              <div className="avatar cursor-pointer ">
               <div className="w-10 mx-auto rounded-full ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
-               
+                <Image src={session.user.image} width={50} height={50}>
+
+                </Image>
               </div>
             </div>
+            )}
+            
           </div>
         </div>
       </div>
