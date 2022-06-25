@@ -23,7 +23,7 @@ export default function Pricing() {
     }, [] )
 
     if (loading) {
-        return <progress class="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
+        return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
     }
     return (
         <div>

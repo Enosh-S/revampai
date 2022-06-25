@@ -56,6 +56,8 @@ export default function Container( {children} ) {
                 layout="fixed"
                 alt="Revampai logo"
                 src="/Revampai.svg"
+                priority="true"
+                
                 
               />
             </div>
@@ -150,7 +152,7 @@ export default function Container( {children} ) {
             {session && (
               <div className="avatar cursor-pointer ">
               <div className="w-10 mx-auto rounded-full ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
-                <Image src={session.user.image} width={50} height={50}>
+                <Image src={session.user.image} width={50} height={50} alt="user image" priority="false">
 
                 </Image>
               </div>
