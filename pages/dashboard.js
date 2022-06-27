@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ImPilcrow } from "react-icons/im";
-import { useSession } from "next-auth/react";
+
 
 export default function Dashboard() {
-  const { data: dashsession } = useSession();
+  
 
   return (
     <div>
@@ -20,26 +20,14 @@ export default function Dashboard() {
             Create a new document and select your usecase
           </p>
           <div className="mt-6 sm:mt-10 flex justify-center">
-            {!dashsession && (
-              <Link href="/signin">
-                <a>
-                  <button className="btn btn-primary gap-2 text-slate-800 text-base font-sans capitalize">
-                    <ImPilcrow size={15} />
-                    New Document
-                  </button>
-                </a>
-              </Link>
-            )}
-            {dashsession && (
-              <Link href="/newdoc">
-                <a>
-                  <button className="btn btn-primary gap-2 text-slate-800 text-base font-sans capitalize">
-                    <ImPilcrow size={15} />
-                    New Document
-                  </button>
-                </a>
-              </Link>
-            )}
+            <Link href="/newdoc">
+              <a>
+                <button className="btn btn-primary gap-2 text-slate-800 text-base font-sans capitalize">
+                  <ImPilcrow size={15} />
+                  New Document
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>
