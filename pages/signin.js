@@ -1,6 +1,6 @@
-import { getProviders, getSession, signIn } from "next-auth/react";
+import { getProviders, signIn as signIntoProvider} from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
-import { RiTwitterFill } from "react-icons/ri";
+
 
 export default function Signin({ providers }) {
   
@@ -18,7 +18,7 @@ export default function Signin({ providers }) {
                 <div key={provider.name} className=" flex justify-center">
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() => signIn(provider.id)}
+                    onClick={() => signIntoProvider(provider.id, {callbackUrl: "/"})}
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
@@ -38,23 +38,10 @@ export default function Signin({ providers }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { req, res } = context;
+export async function getServerSideProps() {
+  
   const providers = await getProviders();
   
-  const session = await getSession({ req }) 
-
-  if (session && res) {
-    res.statusCode = 302
-    res.setHeader("Location", "/")
-    return {
-      props: {
-        session,
-        providers,
-      },
-    }
-  }
-
   return {
     props: { providers },
   };
