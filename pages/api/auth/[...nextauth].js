@@ -20,7 +20,7 @@ export default NextAuth({
    signIn: "/signin",
   },
 
-  secret: process.env.SECRET,
+  secret: process.env.NEXT_AUTH_SECRET,
   
   adapter: FirebaseAdapter({
     db : db,

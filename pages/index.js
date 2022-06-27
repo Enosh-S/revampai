@@ -1,13 +1,13 @@
 import Head from "next/head";
 import Dashboard from "./dashboard";
-import { getSession, useSession } from "next-auth/react";
-import Signin from "./signin";
+import { getSession } from "next-auth/react";
+
 
 
 
 
 export default function Home() {
-  const {data: session} = useSession();
+  
  
 
 
