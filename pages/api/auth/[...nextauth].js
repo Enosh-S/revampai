@@ -20,6 +20,11 @@ export default NextAuth({
    signIn: "/signin",
   },
   
+  callbacks: {
+    async redirect({ url }) {
+      return url
+    },
+  },
   
 
   secret: process.env.NEXTAUTH_SECRET,

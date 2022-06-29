@@ -43,20 +43,14 @@ export default function Signin({ providers }) {
 }
 
 export async function getServerSideProps(context) {
-  const { req, res } = context;
-  const providers = await getProviders();
+  const { req } = context;
   const session = await getSession({ req });
-  if (session && res) {
-    res.statusCode = 302
-    res.setHeader("Location","/")
+  if (session) {
     return {
-      props: {
-        session,
-        providers,
-      }
+      redirect: { destination: "/" },
     };
   }
-  
+  const providers = await getProviders();
   return {
     props: { providers },
   };
