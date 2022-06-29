@@ -7,7 +7,7 @@ export default function Signin({ providers }) {
   return (
     <>
       <div>
-        <div className="flex flex-col items-center mt-32">
+        <div className="flex flex-col items-center mt-32 sm:mx-auto mx-6">
           <div className="card w-96 bg-neutral shadow-xl">
             <div className="card-body">
               <h2 className="card-title mx-auto  text-slate-200 lg:text-2xl text-xl font-semibold tracking-tight">
@@ -18,7 +18,7 @@ export default function Signin({ providers }) {
                 <div key={provider.name} className=" flex justify-center">
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() => signIntoProvider(provider.id, {callbackUrl: "/"})}
+                    onClick={() => signIntoProvider(provider.id, {callbackUrl: "https://revampi-app.vercel.app"})}
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
