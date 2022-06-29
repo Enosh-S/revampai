@@ -18,7 +18,7 @@ export default function Signin({ providers }) {
                 <div key={provider.name} className=" flex justify-center">
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() => signIntoProvider(provider.id, {callbackUrl: "https://revampi-app.vercel.app"})}
+                    onClick={() => signIntoProvider(provider.id)}
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
