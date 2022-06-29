@@ -39,7 +39,7 @@ export default function Container( {children} ) {
     <div className="drawer drawer-mobile">
       <input id="side-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col mb-6">
-        <div className="w-full navbar bg-base-100 dark:bg-base-300 h-16 justify-center bg-opacity-90 backdrop-blur transition-all duration-100 shadow-xl ">
+        <div className="w-full navbar bg-base-100 dark:bg-base-300 h-16 justify-center sticky z-30 top-0 bg-opacity-90 text-base-content backdrop-blur transition-all duration-100  ">
           <div className="navbar-start">
             <label
               htmlFor="side-drawer"
