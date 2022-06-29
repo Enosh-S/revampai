@@ -2,9 +2,11 @@ import {
     useState,
     useEffect
   } from "react";
-import { getSession, signIn } from "next-auth/react";
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Pricing() {
+    const router = useRouter();
     const [loading, setLoading] =useState(true);
 
     useEffect(() => {
@@ -14,7 +16,7 @@ export default function Pricing() {
                 session
             })
             if(!session) {
-                signIn()
+                router.push("/signin")
             } else {
                 setLoading(false)
             }

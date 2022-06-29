@@ -3,8 +3,10 @@ import {
     useEffect
   } from "react";
 import { getSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function DocsHistory() {
+    const router = useRouter();
     const [loading, setLoading] =useState(true);
 
     useEffect(() => {
@@ -14,7 +16,7 @@ export default function DocsHistory() {
                 session
             })
             if(!session) {
-                signIn()
+              router.push("/signin")
             } else {
                 setLoading(false)
             }

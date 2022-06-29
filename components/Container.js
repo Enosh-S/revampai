@@ -87,9 +87,7 @@ export default function Container( {children} ) {
               <div>
               <button
                className="  text-neutral mx-2 btn-sm btn-primary rounded-md text-sm font-semibold tracking-tight  "
-               onClick={signIn
-                // () => router.push("/signin")
-                }
+               onClick={() => router.push("/signin")}
                >
               Sign in
 

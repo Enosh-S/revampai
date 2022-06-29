@@ -16,9 +16,11 @@ import { FcFolder } from "react-icons/fc";
 
 import { db } from "../firebase.config";
 import DocGrid from "../components/Docsgrid";
+import { useRouter } from "next/router";
 
 export default function Dashboard() {
   const { data: session } = useSession();
+  const router = useRouter();
  
   const [documentname, setDocumentname] = useState("");
   const [docsData, setdocsData] = useState([]);
@@ -37,7 +39,7 @@ export default function Dashboard() {
   }, []);
 
   const createDocument = () => {
-    if (!documentname) return;
+   
 
     addDoc(collection(db, "userDocs", session.user.email, "docs"), {
       filename: documentname,
@@ -99,7 +101,7 @@ export default function Dashboard() {
             {!session && (
               <button
                 className="btn btn-primary gap-2 text-slate-800 text-base font-sans capitalize"
-                onClick={signIn}
+                onClick={() => router.push("/signin")}
               >
                 <ImPilcrow size={15} />
                 New Document
