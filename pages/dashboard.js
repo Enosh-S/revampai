@@ -3,13 +3,10 @@ import {
   serverTimestamp,
   collection,
   orderBy,
-  doc,
-  getDocs,
+  
   onSnapshot,
 } from "firebase/firestore";
-import { useCollectionOnce } from "react-firebase-hooks/firestore";
 
-import Link from "next/link";
 
 import { useState, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
@@ -25,18 +22,7 @@ export default function Dashboard() {
  
   const [documentname, setDocumentname] = useState("");
   const [docsData, setdocsData] = useState([]);
-  // const getref = collection(db, "userDocs", session.user.email, "docs");
-
-  // const [snapshot] = useCollectionOnce(
-  //   getDocs(
-  //     collection(db, "userDocs", session.user.email, "docs"),
-  //     orderBy("timestamp", "desc")
-  //   ).then(response => {
-  //     console.log("pulled successfully")
-  //   }).catch(() => {
-  //     console.log("There is some error")
-  //   })
-  // );
+  
 
   useEffect(() => {
     if (!session) return;
@@ -57,21 +43,9 @@ export default function Dashboard() {
       filename: documentname,
       timestamp: serverTimestamp(),
     });
-    // .then(response => {
-    //   alert("Document created successfully")
-    // }).catch(() => {
-    //   alert("Cannot add data")
-    // })
+    
   };
-  const noDoc = () => {
-    if(!docsData) return (
-      <div>
-        <h1>
-          No Documents
-        </h1>
-      </div>
-    );
-  }
+  
 
   return (
     <div>
