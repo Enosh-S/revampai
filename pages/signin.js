@@ -1,9 +1,11 @@
-import { getProviders, signIn as signIntoProvider} from "next-auth/react";
+import {
+  getProviders,
+  getSession,
+  signIn as signIntoProvider,
+} from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
-
 export default function Signin({ providers }) {
-  
   return (
     <>
       <div>
@@ -18,7 +20,9 @@ export default function Signin({ providers }) {
                 <div key={provider.name} className=" flex justify-center">
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() => signIntoProvider(provider.id)}
+                    onClick={() =>
+                      signIntoProvider(provider.id)
+                    }
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
@@ -38,11 +42,18 @@ export default function Signin({ providers }) {
   );
 }
 
-export async function getServerSideProps() {
-  
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: { destination: "/" },
+    };
+  }
   const providers = await getProviders();
-  
   return {
     props: { providers },
   };
+  
+  
 }
