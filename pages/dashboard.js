@@ -5,11 +5,13 @@ import {
   orderBy,
   
   onSnapshot,
+  getDoc,
+  getDocs,
 } from "firebase/firestore";
 
 
 import { useState, useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, getSession } from "next-auth/react";
 
 import { ImPilcrow } from "react-icons/im";
 import { FcFolder } from "react-icons/fc";
@@ -17,29 +19,25 @@ import { FcFolder } from "react-icons/fc";
 import { db } from "../firebase.config";
 import DocGrid from "../components/Docsgrid";
 import { useRouter } from "next/router";
+import { useCollectionOnce } from 'react-firebase-hooks/firestore';
+
 
 export default function Dashboard() {
-  const { data: session } = useSession();
+  const { data: session } = getSession();
   const router = useRouter();
  
   const [documentname, setDocumentname] = useState("");
   const [docsData, setdocsData] = useState([]);
+
   
-
-  useEffect(() => {
-    if (!session) return;
-
-    onSnapshot(collection(db,"userDocs",session.user.email,"docs"), orderBy("timestamp", "desc"), (response) => {
-      setdocsData(
-        response.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id };
-        })
-      );
-    });
-  }, []);
+  
+  const getDocument = () => {
+    getDocs(collection(db,"userDocs",session.user.email,"docs"),orderBy("timestamp","desc"));
+  };
 
   const createDocument = () => {
-   
+    
+    if(!documentname) return;
 
     addDoc(collection(db, "userDocs", session.user.email, "docs"), {
       filename: documentname,
@@ -123,7 +121,8 @@ export default function Dashboard() {
         <section>
         <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
           <h2 className="text-xl font-sans font-bold">My Documents</h2>
-          <button className="btn btn-ghost btn-circle">
+          <button className="btn btn-ghost btn-circle"
+          onClick={getDocument}>
             <FcFolder size={28} />
           </button>
         </div>
@@ -133,14 +132,14 @@ export default function Dashboard() {
       <section className="relative max-w-4xl mx-auto px-2 focus:outline-none sm:px-3 md:px-5 my-5">
         <div className="max-w-4xl grid gap-4 mx-auto sm:grid-cols-3">
           
-          {docsData.map((doc) => (
+          {/* {querySnapshot?.docs.map((doc => (
             <DocGrid
               key={doc.id}
               id={doc.id}
-              filename={doc.filename}
-              date={doc.timestamp}
+              filename={doc.data().filename}
+              date={doc.data().timestamp}
             />
-          ))}
+          )))} */}
         </div>
       </section>
     </div>

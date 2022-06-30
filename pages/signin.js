@@ -3,9 +3,11 @@ import {
   getSession,
   signIn as signIntoProvider,
 } from "next-auth/react";
+import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Signin({ providers }) {
+  const router = useRouter()
   return (
     <>
       <div>
@@ -21,7 +23,7 @@ export default function Signin({ providers }) {
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
                     onClick={() =>
-                      signIntoProvider(provider.id)
+                      signIntoProvider(provider.id, {callbackUrl: "/"})
                     }
                   >
                     <FcGoogle size="28" />
@@ -42,14 +44,7 @@ export default function Signin({ providers }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({ req });
-  if (session) {
-    return {
-      redirect: { destination: "/" },
-    };
-  }
+export async function getServerSideProps() {
   const providers = await getProviders();
   return {
     props: { providers },
