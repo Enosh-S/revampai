@@ -5,19 +5,14 @@
 @layer components {
     .sidebar-icon {
       @apply relative flex items-center justify-center 
-      h-12 w-12 mt-2 mb-2 mx-auto  
-    bg-gray-400 hover:bg-[#49deff] dark:bg-[#1b263b]
-    text-[#49deff] hover:text-white
-      hover:rounded-xl rounded-3xl
+      h-12 w-40 mt-1 mb-1 ml-2 px-3
+     hover:bg-[#1b263b]
+    text-primary
+      hover:rounded-md rounded-xl
       transition-all duration-300 ease-linear
       cursor-pointer shadow-lg ;
     }
-    .sidebar-tooltip {
-      @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
-      text-white bg-[#1b263b]
-      text-xs font-bold 
-      transition-all duration-100 scale-0 origin-left;
-    }
+    
   
     .sidebar-hr {
       @apply bg-gray-200 dark:bg-[#1b263b]
