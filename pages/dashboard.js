@@ -120,7 +120,7 @@ export default function Dashboard() {
       <section className="flex flex-col lg:max-w-5xl sm:max-w-2xl items-center mx-auto justify-center opacity-90 py-5">
         <div >
           <Image
-          
+          alt="No Documents"
           src="/nodata.svg"
           height={220}
           width={220}
