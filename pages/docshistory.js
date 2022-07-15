@@ -1,37 +1,29 @@
-// import {
-//     useState,
-//     useEffect
-//   } from "react";
-// import { getSession, signIn } from "next-auth/react";
-// import { useRouter } from "next/router";
+import {
+    useState,
+    
+  } from "react";
 
-// export default function DocsHistory() {
-//     const router = useRouter();
-//     const [loading, setLoading] =useState(true);
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
-//     useEffect(() => {
-//         const securePage = async () => {
-//             const session = await getSession()
-//             console.log({
-//                 session
-//             })
-//             if(!session) {
-//               router.push("/signin")
-//             } else {
-//                 setLoading(false)
-//             }
-//         }
-//         securePage()
-//     }, [] )
+export default function DocsHistory() {
+    const{data: session} = useSession();
+    const router = useRouter();
+    const [loading, setLoading] =useState(true);
+     
+    if (loading) {
+        return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
+    }
 
-//     if (loading) {
-//         return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
-//     }
-//     return (
-//         <div>
-//             <h1>
-//                 This is DocsHistory
-//             </h1>
-//         </div>
-//     )
-// }
+    if(!session){
+        router.push("/signin")
+        setLoading(false)
+    } 
+    return (
+        <div>
+            <h1>
+                This is DocsHistory
+            </h1>
+        </div>
+    )
+}

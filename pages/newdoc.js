@@ -1,37 +1,29 @@
-// import {
-//     useState,
-//     useEffect
-//   } from "react";
-// import { getSession } from "next-auth/react";
-// import { useRouter } from "next/router";
+import {
+    useState
+  } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-// export default function NewDoc() {
-//     const router = useRouter();
-//     const [loading, setLoading] =useState(true);
+export default function NewDoc() {
+    const{data: session} = useSession();
+    const router = useRouter();
+    const [loading, setLoading] =useState(true);
 
-//     useEffect(() => {
-//         const securePage = async () => {
-//             const session = await getSession()
-//             console.log({
-//                 session
-//             })
-//             if(!session) {
-//                 router.push("/signin")
-//             } else {
-//                 setLoading(false)
-//             }
-//         }
-//         securePage()
-//     }, [] )
 
-//     if (loading) {
-//         return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
-//     }
-//     return (
-//         <div>
-//             <h1>
-//                 This is NewDoc
-//             </h1>
-//         </div>
-//     )
-// }
+    if (loading) {
+        return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
+    }
+
+    if(!session){
+        router.push("/signin")
+        setLoading(false)
+    } 
+    return (
+        <div>
+            <h1>
+                This is NewDoc
+            </h1>
+        </div>
+    )
+    
+}
