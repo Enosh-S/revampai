@@ -1,6 +1,6 @@
 import { HiOutlineDocumentText, HiOutlineDotsVertical, HiOutlineShare } from "react-icons/hi";
 
-export default function DocGrid({ id, filename, date }) {
+export default function DocGrid({ docfile }) {
   return (
     
     <div>
@@ -10,7 +10,7 @@ export default function DocGrid({ id, filename, date }) {
       >
         <div className="flex flex-grow items-center justify-between">
           <HiOutlineDocumentText size={28} className="dark:text-primary group-hover:text-neutral"/>
-          <h3 className="text-slate-900 dark:text-slate-200 group-hover:text-neutral text-md font-semibold flex flex-grow ml-1">{filename}</h3>
+          <h3 className="text-slate-900 dark:text-slate-200 group-hover:text-neutral text-md font-semibold flex flex-grow ml-1">{docfile.data.filename}</h3>
           <div className="dropdown dropdown-end">
           <label
            tabIndex="0"
@@ -29,7 +29,12 @@ export default function DocGrid({ id, filename, date }) {
           </div>
           
         </div>
-        <p className="text-slate-500 group-hover:text-neutral text-xs ml-1">{date?.toDate().toLocaleDateString()}</p>
+        <p className="text-slate-500 group-hover:text-neutral text-xs ml-1">
+        {new Date(docfile.data.createdOn).toLocaleString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "2-digit",
+        })} </p>
       </a>
     </div>
   );

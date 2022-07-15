@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 import { ImPilcrow } from "react-icons/im";
 import { FcFolder } from "react-icons/fc";
 
-import { addDocs, collection, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { useRouter } from "next/router";
+import DocGrid from "../components/Docsgrid";;
+import useFetchDocs from "../hooks/FetchDocs";
+import Image from "next/image";
 
 
 
@@ -16,26 +19,21 @@ export default function Dashboard() {
 
 
   const [documentname, setDocumentname] = useState("");
+  const { documents } = useFetchDocs()
+  
+  
+  
 
-  // async function createDoc() {
-  //   if(!documentname) return;
-    
-  //   const userRef = collection(db,"userDocs",session.user.email,"docs")
-  //   await addDocs(userRef, {
-  //     filename: documentname,
-  //     timestamp: serverTimestamp(),
-  //   })
-  // }
-
-  const createDoc = () => {
+  const createDoc = (e) => {
     if(!documentname) return;
     else{
-    addDocs(collection(db, "userDocs", session.user.email, "docs"), {
-        Docfilename: documentname,
-        Timestamp: serverTimestamp(),
+    addDoc(collection(db, "userDocs", session.user.email, "docs"), {
+        docfilename: documentname,
+        timestamp: serverTimestamp(),
         body: ""
       })
     }
+    router.reload()
   }
 
   return (
@@ -65,7 +63,7 @@ export default function Dashboard() {
               <label
                 htmlFor="modal"
                 className="btn btn-primary btn-md mt-5 capitalize text-base font-semibold tracking-tight"
-                onClick={createDoc}
+                onClick={(e) => createDoc()}
               >
                 Create
               </label>
@@ -109,7 +107,39 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      {documents.length == 0 && (
+        <>
+        <section>
+        <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
+          <h2 className="text-xl font-sans font-bold">My Documents</h2>
+          <button className="btn btn-ghost btn-circle">
+            <FcFolder size={28} />
+          </button>
+        </div>
+      </section>
+      <section className="flex flex-col lg:max-w-5xl sm:max-w-2xl items-center mx-auto justify-center opacity-90 py-5">
+        <div >
+          <Image
+          
+          src="/nodata.svg"
+          height={220}
+          width={220}
+          objectFit="contain"
 
+          />
+          
+        </div>
+        <div>
+        <h2 className="font-sans text-center  px-3 lg:text-sm md:text-xs">Looks like you have no documents yet, Create One</h2>
+        </div>
+        
+
+      </section>
+      </>
+      )}
+      {documents.length > 0 && (
+
+      <>  
       <section>
         <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
           <h2 className="text-xl font-sans font-bold">My Documents</h2>
@@ -118,19 +148,20 @@ export default function Dashboard() {
           </button>
         </div>
       </section>
+      
 
       <section className="relative max-w-4xl mx-auto px-2 focus:outline-none sm:px-3 md:px-5 my-5">
         <div className="max-w-4xl grid gap-4 mx-auto sm:grid-cols-3">
-          {/* {querySnapshot?.map.forEach((doc => (
+          {documents.map(doc => 
             <DocGrid
               key={doc.id}
-              id={doc.id}
-              filename={doc.data().filename}
-              date={doc.data().timestamp}
+              docfile={doc}
             />
-          )))} */}
+          )}
         </div>
       </section>
+      </>
+      )}
     </div>
   );
 }
