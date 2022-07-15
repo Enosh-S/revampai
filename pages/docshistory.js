@@ -1,37 +1,37 @@
-import {
-    useState,
-    useEffect
-  } from "react";
-import { getSession, signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+// import {
+//     useState,
+//     useEffect
+//   } from "react";
+// import { getSession, signIn } from "next-auth/react";
+// import { useRouter } from "next/router";
 
-export default function DocsHistory() {
-    const router = useRouter();
-    const [loading, setLoading] =useState(true);
+// export default function DocsHistory() {
+//     const router = useRouter();
+//     const [loading, setLoading] =useState(true);
 
-    useEffect(() => {
-        const securePage = async () => {
-            const session = await getSession()
-            console.log({
-                session
-            })
-            if(!session) {
-              router.push("/signin")
-            } else {
-                setLoading(false)
-            }
-        }
-        securePage()
-    }, [] )
+//     useEffect(() => {
+//         const securePage = async () => {
+//             const session = await getSession()
+//             console.log({
+//                 session
+//             })
+//             if(!session) {
+//               router.push("/signin")
+//             } else {
+//                 setLoading(false)
+//             }
+//         }
+//         securePage()
+//     }, [] )
 
-    if (loading) {
-        return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
-    }
-    return (
-        <div>
-            <h1>
-                This is DocsHistory
-            </h1>
-        </div>
-    )
-}
+//     if (loading) {
+//         return <progress className="flex justify-center progress progress-secondary h-1 opacity-70 max-w-screen"></progress>
+//     }
+//     return (
+//         <div>
+//             <h1>
+//                 This is DocsHistory
+//             </h1>
+//         </div>
+//     )
+// }

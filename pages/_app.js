@@ -10,11 +10,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
 
-      <SessionProvider session={session}>
+       <SessionProvider session={session}>
         <Container>
           <Component {...pageProps} />
         </Container>
-      </SessionProvider>
+        </SessionProvider>
+      
     </>
   );
 }

@@ -10,16 +10,15 @@ import { FiLogOut } from "react-icons/fi";
 import { ImPilcrow } from "react-icons/im";
 import Image from "next/image";
 import Link from "next/link";
-import { signIn, useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 
 
 
 
 export default function Container( {children} ) {
-
   const {data: session} = useSession();
 
   const SidebarIcon = ({ icon, text = "tooltip" }) => (
@@ -30,6 +29,8 @@ export default function Container( {children} ) {
   );
   const Divider = () => <hr className="sidebar-hr" />;
   const router = useRouter();
+
+ 
  
   
 
@@ -49,7 +50,7 @@ export default function Container( {children} ) {
             </label>
           </div>
           <div className="navbar-center">
-            <div className="mx-1 min-w-max ">
+            <div className="mx-1 min-w-max cursor-pointer">
               <Image
                 width={45}
                 height={45}
@@ -144,10 +145,8 @@ export default function Container( {children} ) {
                 
               </div>
             </Link>
-            {!session && (
-              <div />
-            )}
-            {session && (
+           
+            {session &&  (
               <div className="avatar cursor-pointer ">
               <div className="w-10 mx-auto rounded-full ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
                 <Image src={session.user.image} width={50} height={50} alt="user image" priority="false">
@@ -155,6 +154,9 @@ export default function Container( {children} ) {
                 </Image>
               </div>
             </div>
+            )}
+            {!session && (
+              <div/>
             )}
             
           </div>

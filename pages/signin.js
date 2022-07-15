@@ -1,13 +1,13 @@
-import {
-  getProviders,
-  getSession,
-  signIn as signIntoProvider,
-} from "next-auth/react";
-import { useRouter } from "next/router";
+
+
+import { signIn, useSession, getProviders } from "next-auth/react";
+import { Router, useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Signin({ providers }) {
-  const router = useRouter()
+  const {data: session} = useSession();
+  const router = useRouter();
+
   return (
     <>
       <div>
@@ -19,18 +19,16 @@ export default function Signin({ providers }) {
               </h2>
               <div className="divider"> 👇 </div>
               {Object.values(providers).map((provider) => (
-                <div key={provider.name} className=" flex justify-center">
+                <div className=" flex justify-center" key={provider.name}>
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() =>
-                      signIntoProvider(provider.id, {callbackUrl: "/"})
-                    }
+                    onClick={() => signIn(provider.id, {callbackUrl: "/"})}
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
                   </button>
                 </div>
-              ))}
+                ))}
             </div>
           </div>
           <div className="flex mt-5">

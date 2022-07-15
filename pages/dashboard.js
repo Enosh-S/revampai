@@ -1,51 +1,42 @@
-import {
-  addDoc,
-  serverTimestamp,
-  collection,
-  orderBy,
-  
-  onSnapshot,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-
-
-import { useState, useEffect } from "react";
-import { useSession, signIn, getSession } from "next-auth/react";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 import { ImPilcrow } from "react-icons/im";
 import { FcFolder } from "react-icons/fc";
 
-import { db } from "../firebase.config";
-import DocGrid from "../components/Docsgrid";
+import { addDocs, collection, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 import { useRouter } from "next/router";
-import { useCollectionOnce } from 'react-firebase-hooks/firestore';
+
 
 
 export default function Dashboard() {
-  const { data: session } = getSession();
+  const { data: session } = useSession()
   const router = useRouter();
- 
+
+
   const [documentname, setDocumentname] = useState("");
-  const [docsData, setdocsData] = useState([]);
 
-  
-  
-  const getDocument = () => {
-    getDocs(collection(db,"userDocs",session.user.email,"docs"),orderBy("timestamp","desc"));
-  };
-
-  const createDocument = () => {
+  // async function createDoc() {
+  //   if(!documentname) return;
     
+  //   const userRef = collection(db,"userDocs",session.user.email,"docs")
+  //   await addDocs(userRef, {
+  //     filename: documentname,
+  //     timestamp: serverTimestamp(),
+  //   })
+  // }
+
+  const createDoc = () => {
     if(!documentname) return;
-
-    addDoc(collection(db, "userDocs", session.user.email, "docs"), {
-      filename: documentname,
-      timestamp: serverTimestamp(),
-    });
-    
-  };
-  
+    else{
+    addDocs(collection(db, "userDocs", session.user.email, "docs"), {
+        Docfilename: documentname,
+        Timestamp: serverTimestamp(),
+        body: ""
+      })
+    }
+  }
 
   return (
     <div>
@@ -56,7 +47,7 @@ export default function Dashboard() {
             <input
               value={documentname}
               onChange={(e) => setDocumentname(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && createDocument()}
+              onKeyDown={(e) => e.key === "Enter" && createDoc()}
               maxLength={20}
               type="text"
               placeholder="Give your document a name.."
@@ -74,7 +65,7 @@ export default function Dashboard() {
               <label
                 htmlFor="modal"
                 className="btn btn-primary btn-md mt-5 capitalize text-base font-semibold tracking-tight"
-                onClick={createDocument}
+                onClick={createDoc}
               >
                 Create
               </label>
@@ -109,6 +100,7 @@ export default function Dashboard() {
               <label
                 htmlFor="modal"
                 className="btn btn-primary modal-button gap-2 text-slate-800 text-base font-sans capitalize"
+                onClick={() => setDocumentname("")}
               >
                 <ImPilcrow size={15} />
                 New Document
@@ -117,22 +109,19 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      
-        <section>
+
+      <section>
         <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
           <h2 className="text-xl font-sans font-bold">My Documents</h2>
-          <button className="btn btn-ghost btn-circle"
-          onClick={getDocument}>
+          <button className="btn btn-ghost btn-circle">
             <FcFolder size={28} />
           </button>
         </div>
       </section>
-      
-      
+
       <section className="relative max-w-4xl mx-auto px-2 focus:outline-none sm:px-3 md:px-5 my-5">
         <div className="max-w-4xl grid gap-4 mx-auto sm:grid-cols-3">
-          
-          {/* {querySnapshot?.docs.map((doc => (
+          {/* {querySnapshot?.map.forEach((doc => (
             <DocGrid
               key={doc.id}
               id={doc.id}

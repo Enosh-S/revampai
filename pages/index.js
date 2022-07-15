@@ -1,15 +1,13 @@
 import Head from "next/head";
 import Dashboard from "./dashboard";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 
 
 
 
 export default function Home() {
-  
  
-
 
   return (
     <div>
