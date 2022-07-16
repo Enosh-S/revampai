@@ -14,8 +14,7 @@ export default NextAuth({
     }),
   ],
   adapter: FirestoreAdapter({
-    ...firebaseConfig
-    
+    ...firebaseConfig  
   }),
   pages: {
     signIn: "/signin",
