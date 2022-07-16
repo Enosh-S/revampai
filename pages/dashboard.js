@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import DocGrid from "../components/Docsgrid";
 import useFetchDocs from "../hooks/FetchDocs";
 import Image from "next/image";
-import Container from "../components/Container";
+
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -18,6 +18,7 @@ export default function Dashboard() {
 
   const [documentname, setDocumentname] = useState("");
   const { documents } = useFetchDocs();
+  console.log( documents)
 
   const createDoc = (e) => {
     if (!documentname) return;
@@ -27,7 +28,7 @@ export default function Dashboard() {
         timestamp: serverTimestamp(),
         body: "",
       });
-    }
+    };
     router.reload();
   };
 
