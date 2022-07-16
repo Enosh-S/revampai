@@ -33,7 +33,7 @@ export default function Container({ children }) {
     <div className="drawer drawer-mobile">
       <input id="side-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col mb-6">
-        <div className="w-full navbar bg-gray-200 dark:bg-neutral h-16 justify-center sticky z-50 top-0 bg-opacity-90 text-base-content backdrop-blur transition-all duration-100  border-b border-b-base-300 ">
+        <div className="w-full navbar bg-gray-200 dark:bg-neutral/90 h-16 justify-center sticky z-50 top-0  text-base-content backdrop-blur-md transition-all duration-100  border-b border-b-base-300 ">
           <div className="navbar-start">
             <label
               htmlFor="side-drawer"
@@ -43,7 +43,7 @@ export default function Container({ children }) {
             </label>
           </div>
           <div className="navbar-center">
-          <div className="lg:hidden flex items-center justify-center mt-3 ">
+          <div className="lg:hidden flex items-center justify-center ">
             <div className=" min-w-max cursor-pointer">
               <Image
                 width={45}

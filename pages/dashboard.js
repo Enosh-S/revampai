@@ -7,34 +7,29 @@ import { FcFolder } from "react-icons/fc";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { useRouter } from "next/router";
-import DocGrid from "../components/Docsgrid";;
+import DocGrid from "../components/Docsgrid";
 import useFetchDocs from "../hooks/FetchDocs";
 import Image from "next/image";
-
-
+import Container from "../components/Container";
 
 export default function Dashboard() {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const router = useRouter();
 
-
   const [documentname, setDocumentname] = useState("");
-  const { documents } = useFetchDocs()
-  
-  
-  
+  const { documents } = useFetchDocs();
 
   const createDoc = (e) => {
-    if(!documentname) return;
-    else{
-    addDoc(collection(db, "userDocs", session.user.email, "docs"), {
+    if (!documentname) return;
+    else {
+      addDoc(collection(db, "userDocs", session.user.email, "docs"), {
         docfilename: documentname,
         timestamp: serverTimestamp(),
-        body: ""
-      })
+        body: "",
+      });
     }
-    router.reload()
-  }
+    router.reload();
+  };
 
   return (
     <div>
@@ -109,58 +104,51 @@ export default function Dashboard() {
       </div>
       {documents.length == 0 && (
         <>
-        <section>
-        <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
-          <h2 className="text-xl font-sans font-bold">My Documents</h2>
-          <button className="btn btn-ghost btn-circle">
-            <FcFolder size={28} />
-          </button>
-        </div>
-      </section>
-      <section className="flex flex-col lg:max-w-5xl sm:max-w-2xl items-center mx-auto justify-center opacity-90 py-5">
-        <div >
-          <Image
-          alt="No Documents"
-          src="/nodata.svg"
-          height={220}
-          width={220}
-          objectFit="contain"
-
-          />
-          
-        </div>
-        <div>
-        <h2 className="font-sans text-center  px-3 lg:text-sm md:text-xs">Looks like you have no documents yet, Create One</h2>
-        </div>
-        
-
-      </section>
-      </>
+          <section>
+            <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
+              <h2 className="text-xl font-sans font-bold">My Documents</h2>
+              <button className="btn btn-ghost btn-circle">
+                <FcFolder size={28} />
+              </button>
+            </div>
+          </section>
+          <section className="flex flex-col lg:max-w-5xl sm:max-w-2xl items-center mx-auto justify-center opacity-90 py-5">
+            <div>
+              <Image
+                alt="No Documents"
+                src="/nodata.svg"
+                height={220}
+                width={220}
+                objectFit="contain"
+              />
+            </div>
+            <div>
+              <h2 className="font-sans text-center  px-3 lg:text-sm md:text-xs">
+                Looks like you have no documents yet, Create One
+              </h2>
+            </div>
+          </section>
+        </>
       )}
       {documents.length > 0 && (
+        <>
+          <section>
+            <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
+              <h2 className="text-xl font-sans font-bold">My Documents</h2>
+              <button className="btn btn-ghost btn-circle">
+                <FcFolder size={28} />
+              </button>
+            </div>
+          </section>
 
-      <>  
-      <section>
-        <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
-          <h2 className="text-xl font-sans font-bold">My Documents</h2>
-          <button className="btn btn-ghost btn-circle">
-            <FcFolder size={28} />
-          </button>
-        </div>
-      </section>
-      
-
-      <section className="relative max-w-4xl mx-auto px-2 focus:outline-none sm:px-3 md:px-5 my-5">
-        <div className="max-w-4xl grid gap-4 mx-auto sm:grid-cols-3">
-          {documents.map(doc => 
-            <DocGrid
-              key={doc.id}
-              docfile={doc}
-            />
-          )}
-        </div>
-      </section>
-      </>
+          <section className=" max-w-4xl mx-auto focus:outline-none my-5">
+            <div className=" grid gap-4 lg:mx-auto mx-3 lg:grid-cols-3 grid-cols-2 justify-center place-content-stretch content-start">
+              {documents.map((doc) => (
+                <DocGrid key={doc.id} docfile={doc} />
+              ))}
+            </div>
+          </section>
+        </>
       )}
     </div>
   );

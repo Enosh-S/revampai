@@ -1,41 +1,59 @@
-import { HiOutlineDocumentText, HiOutlineDotsVertical, HiOutlineShare } from "react-icons/hi";
+import Link from "next/link";
+import {
+  HiOutlineDocumentText,
+  HiOutlineDotsVertical,
+  HiOutlineShare,
+} from "react-icons/hi";
 
 export default function DocGrid({ docfile }) {
   return (
-    
     <div>
-      <a
-        href="#"
-        className="group block sm:max-w-xs max-w-md mx-auto rounded-lg p-6 bg-neutral ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-primary hover:ring-sky-500"
-      >
-        <div className="flex flex-grow items-center justify-between">
-          <HiOutlineDocumentText size={28} className="dark:text-primary group-hover:text-neutral"/>
-          <h3 className="text-slate-900 dark:text-slate-200 group-hover:text-neutral text-md font-semibold flex flex-grow ml-1">{docfile.data.filename}</h3>
-          <div className="dropdown dropdown-end">
-          <label
-           tabIndex="0"
-           className="btn btn-circle btn-ghost btn-xs ">
-           <HiOutlineDotsVertical size={20} className="dark:text-slate-200 text-gray-400 group-hover:dark:text-neutral" />
-          </label>
-          <ul tabIndex="0" className="dropdown-content menu p-3 space-y-2 shadow bg-base-200 rounded-box w-44" >
-          <li><button className="btn bg-neutral gap-2 text-slate-200 capitalize hover:bg-neutral hover:text-slate-200 mt-1 text-md">
-             <HiOutlineShare size={18} />
-             Share
-             </button></li>
-             <li><button className="btn bg-secondary capitalize text-neutral hover:bg-neutral hover:text-slate-200 mt-1 text-md">
-             Edit
-             </button></li>
-          </ul>
+      <Link href={`/editdoc/${docfile.id}`}>
+        <div className=" dark:bg-neutral flex flex-1 rounded-md py-5 px-2 justify-between cursor-pointer hover:bg-base-200 group">
+          <div className="inline-block">
+            <HiOutlineDocumentText size="24" />
           </div>
-          
+          <div className="flex flex-col space-y-1 flex-grow ml-2 group">
+            <h2 className="text-sm font-sans truncate capitalize dark:text-slate-300  ">
+              {docfile.data.filename}
+            </h2>
+            <p className="text-xs font-sans dark:text-slate-500 ">
+              {new Date(docfile.data.createdOn).toLocaleString("en-Us", {
+                day: "numeric",
+                month: "short",
+                year: "2-digit",
+              })}
+            </p>
+          </div>
+          <div className="dropdown dropdown-end">
+            <label
+              tabIndex="0"
+              className="btn btn-circle btn-ghost btn-xs flex-grow-0 "
+            >
+              <HiOutlineDotsVertical
+                size={20}
+                className="dark:text-slate-200 text-gray-400"
+              />
+            </label>
+            <ul
+              tabIndex="0"
+              className="dropdown-content menu p-3 space-y-2 shadow bg-base-200 rounded-box w-32 h-24"
+            >
+              <li>
+                <button className="btn btn-sm bg-neutral gap-2 text-slate-200 capitalize hover:bg-neutral hover:text-slate-200 text-sm py-1">
+                  <HiOutlineShare size={18} />
+                  Share
+                </button>
+              </li>
+              <li>
+                <button className="btn btn-sm bg-secondary capitalize text-neutral hover:bg-neutral hover:text-slate-200 py-1 text-sm">
+                  Edit
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-        <p className="text-slate-500 group-hover:text-neutral text-xs ml-1">
-        {new Date(docfile.data.createdOn).toLocaleString("en-US", {
-          day: "numeric",
-          month: "short",
-          year: "2-digit",
-        })} </p>
-      </a>
+      </Link>
     </div>
   );
 }
