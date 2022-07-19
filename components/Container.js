@@ -4,29 +4,43 @@ import {
   RiCalendarFill,
   RiVipDiamondFill,
   RiMenu4Fill,
-  RiCloseFill
+  RiCloseFill,
 } from "react-icons/ri";
 import { FiLogOut } from "react-icons/fi";
 import { ImPilcrow } from "react-icons/im";
+
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function Container({ children }) {
   const { data: session } = useSession();
 
+  const [open, setOpen] = useState(false);
+
   const SidebarIcon = ({ icon, text }) => (
-    <div className="sidebar-icon flex ">
+    <div
+      className={` ${
+        open && "w-44 justify-start pl-5 pr-2 group"
+      } sidebar-icon flex mt-3`}
+    >
       <div>{icon}</div>
-      <h2 className="flex flex-1 first-letter:font-sans text-sm text-slate-200 pl-2">
+      <h2
+        className={`flex flex-1 font-sans group-hover:font-semibold text-sm text-slate-200 pl-2 group-hover:text-slate-800 ${
+          !open && "hidden"
+        }`}
+      >
         {text}
       </h2>
     </div>
   );
-  const Divider = () => <hr className="sidebar-hr" />;
+  const Divider = () => (
+    <hr className={`${!open && "w-10 justify-center -ml-0.5"} sidebar-hr`} />
+  );
   const router = useRouter();
 
   return (
@@ -43,22 +57,22 @@ export default function Container({ children }) {
             </label>
           </div>
           <div className="navbar-center">
-          <div className="lg:hidden flex items-center justify-center ">
-            <div className=" min-w-max cursor-pointer">
-              <Image
-                width={45}
-                height={45}
-                layout="fixed"
-                alt="Revampai logo"
-                src="/Revampai.svg"
-                priority="true"
-              />
+            <div className=" flex items-center justify-center ">
+              <div className=" lg:hidden min-w-max cursor-pointer">
+                <Image
+                  width={45}
+                  height={45}
+                  layout="fixed"
+                  alt="Revampai logo"
+                  src="/Revampai.svg"
+                  priority="true"
+                />
+              </div>
+
+              <h1 className=" font-sans lg:ml-0 font-bold tracking-tight text-xl text-white">
+                Revamp AI
+              </h1>
             </div>
-            
-            <h1 className=" font-sans lg:ml-0 font-bold tracking-tight text-xl text-white">
-              Revamp AI
-            </h1>
-          </div>
           </div>
           <div className="navbar-end">
             <div>
@@ -108,93 +122,98 @@ export default function Container({ children }) {
           className="drawer-overlay lg:hidden"
         ></label>
         <div
-          className=" flex flex-col float-right h-screen w-48
-                  bg-white dark:bg-base-300 shadow-lg"
-        > 
-          <div className="lg:flex items-center justify-center mt-3 hidden">
-            <div className=" min-w-max cursor-pointer">
+          className={`dark:bg-base-100 max-h-screen overflow-hidden h-screen px-5 -mb-5 pt-4 ${
+            open ? "w-56" : "w-20"
+          } duration-500  relative`}
+        >
+          <div className="inline-flex">
+            <div className={`cursor-pointer ${open && "ml-3"}`}>
               <Image
-                width={45}
-                height={45}
+                width={42}
+                height={42}
                 layout="fixed"
                 alt="Revampai logo"
                 src="/Revampai.svg"
                 priority="true"
+                onClick={() => setOpen(!open)}
               />
             </div>
-            
-            <h1 className=" font-sans lg:ml-0 font-bold tracking-tight text-xl text-white">
-              Revamp AI
+
+            <h1
+              className={`text-slate-300 font-sans font-bold tracking-tight text-xl mt-3 duration-300 ${
+                !open && "scale-0 hidden lg:flex"
+              }`}
+            >
+              Revamp&nbsp;AI
             </h1>
           </div>
-          <div className="flex justify-end my-2 lg:hidden">
-          <label
-              htmlFor="side-drawer"
-              className="btn btn-circle btn-ghost dark:text-white text-gray-700 "
-            >
-              <RiCloseFill size="22" />
-            </label>
-            </div>
           <Divider />
-          <div className="flex flex-col space-y-1 mt-3 mb-auto">
-            <Link href="/" passHref>
-              <a>
-                {" "}
-                <SidebarIcon
-                  icon={<RiLayout5Fill size="22" />}
-                  text="Dashboard"
-                />{" "}
-              </a>
-            </Link>
-            <Link href="/newdoc" passHref>
-              <div>
+          <div className="flex-col mt-3 ">
+            <div>
+              <Link href="/" passHref>
                 <a>
                   {" "}
                   <SidebarIcon
-                    icon={<ImPilcrow size="20" />}
-                    text="New Document"
-                  />
-                </a>
-              </div>
-            </Link>
-            <Link href="/docshistory" passHref>
-              <div>
-                <a>
-                  {" "}
-                  <SidebarIcon
-                    icon={<RiFileTextFill size="22" />}
-                    text="My Documents"
+                    icon={<RiLayout5Fill size="22" />}
+                    text="Dashboard"
                   />{" "}
                 </a>
-              </div>
-            </Link>
-            <Link href="/schedule" passHref>
-              <div>
-                <a>
-                  {" "}
-                  <SidebarIcon
-                    icon={<RiCalendarFill size="22" />}
-                    text="Schedule"
-                  />{" "}
-                </a>
-              </div>
-            </Link>
-            <Link href="/pricing" passHref>
-              <div>
-                <a>
-                  {" "}
-                  <SidebarIcon
-                    icon={<RiVipDiamondFill size="22" />}
-                    text="Premium"
-                  
-                  />{" "}
-                </a>
-              </div>
-            </Link>
+              </Link>
+              <Link href="/newdoc" passHref>
+                <div>
+                  <a>
+                    {" "}
+                    <SidebarIcon
+                      icon={<ImPilcrow size="20" />}
+                      text="New Document"
+                    />
+                  </a>
+                </div>
+              </Link>
+              <Link href="/docshistory" passHref>
+                <div>
+                  <a>
+                    {" "}
+                    <SidebarIcon
+                      icon={<RiFileTextFill size="22" />}
+                      text="My Documents"
+                    />{" "}
+                  </a>
+                </div>
+              </Link>
+              <Link href="/schedule" passHref>
+                <div>
+                  <a>
+                    {" "}
+                    <SidebarIcon
+                      icon={<RiCalendarFill size="22" />}
+                      text="Schedule"
+                    />{" "}
+                  </a>
+                </div>
+              </Link>
+              <Link href="/pricing" passHref>
+                <div>
+                  <a>
+                    {" "}
+                    <SidebarIcon
+                      icon={<RiVipDiamondFill size="22" />}
+                      text="Premium"
+                    />{" "}
+                  </a>
+                </div>
+              </Link>
+             
+            </div>
+          </div>
 
+          <div
+            className={`absolute bottom-0 left-0 bg-base-300 duration-300 border-t border-t-neutral rounded-t-lg ${
+              !open ? "w-20" : "w-[223px]"
+            }`}
+          >
             {session && (
-              
-              <div className=" items-center flex ml-5">
+              <div className=" items-center flex ml-2 pb-5 pl-3 ">
                 <div className="avatar cursor-pointer">
                   <div className="rounded-full mt-5 ring ring-secondary ring-offset-gray-900 hover:opacity-80 ring-offset-2">
                     <Image
@@ -206,14 +225,24 @@ export default function Container({ children }) {
                       priority="false"
                     />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col space-y-1 ml-3 mt-5">
-                    <h4 className="text-sm inline-flex-grow font-sans font-normal text-slate-200 ">{session.user.name}</h4>
-                    <p className="text-xs font-sans text-slate-500">Free ⭐</p>
-                  </div>
+                  <h4
+                    className={`text-sm inline-flex font-sans font-normal text-slate-200 ${
+                      !open && "hidden"
+                    }`}
+                  >
+                    {session.user.name}
+                  </h4>
+                  <p
+                    className={`text-xs font-sans text-slate-500 ${
+                      !open && "hidden"
+                    }`}
+                  >
+                    Free ⭐
+                  </p>
+                </div>
               </div>
-              
             )}
             {!session && <div />}
           </div>

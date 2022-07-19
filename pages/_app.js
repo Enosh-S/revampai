@@ -1,11 +1,18 @@
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Container from "../components/Container";
+
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  
+  if (Component.getLayout) {
+    return Component.getLayout(
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    );
+  }
+
   return (
     <>
       <Head>

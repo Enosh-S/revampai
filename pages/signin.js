@@ -1,11 +1,9 @@
-
-
 import { signIn, useSession, getProviders } from "next-auth/react";
 import { Router, useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Signin({ providers }) {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
   return (
@@ -22,13 +20,13 @@ export default function Signin({ providers }) {
                 <div className=" flex justify-center" key={provider.name}>
                   <button
                     className=" btn gap-2 dark:bg-base-100 mt-5 bg-gray-400"
-                    onClick={() => signIn(provider.id, {callbackUrl: "/"})}
+                    onClick={() => signIn(provider.id, { callbackUrl: "/" })}
                   >
                     <FcGoogle size="28" />
                     Continue with {provider.name}
                   </button>
                 </div>
-                ))}
+              ))}
             </div>
           </div>
           <div className="flex mt-5">
@@ -42,11 +40,17 @@ export default function Signin({ providers }) {
   );
 }
 
+Signin.getLayout = function PageLayout(page) {
+  return (
+  <>
+  { page } 
+  </>
+  )
+};
+
 export async function getServerSideProps() {
   const providers = await getProviders();
   return {
     props: { providers },
   };
-  
-  
 }

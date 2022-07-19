@@ -12,21 +12,24 @@ import useFetchDocs from "../hooks/FetchDocs";
 import Image from "next/image";
 
 
+
+
 export default function Dashboard() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [documentname, setDocumentname] = useState("");
+  const [documentname, setDocumentname] = useState("Untitled Document");
   const { documents } = useFetchDocs();
-  console.log( documents)
+  const [documentbody, setDocumentbody] = useState("test");
 
-  const createDoc = (e) => {
+  const createDoc = () => {
     if (!documentname) return;
     else {
+      
       addDoc(collection(db, "userDocs", session.user.email, "docs"), {
         docfilename: documentname,
         timestamp: serverTimestamp(),
-        body: "",
+        body: documentbody,
       });
     };
     router.reload();
@@ -34,6 +37,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      
       <div>
         <input type="checkbox" id="modal" className="modal-toggle" />
         <div className="modal">
@@ -59,7 +63,7 @@ export default function Dashboard() {
               <label
                 htmlFor="modal"
                 className="btn btn-primary btn-md mt-5 capitalize text-base font-semibold tracking-tight"
-                onClick={(e) => createDoc()}
+                onClick={() => createDoc()}
               >
                 Create
               </label>
@@ -106,7 +110,7 @@ export default function Dashboard() {
       {documents.length == 0 && (
         <>
           <section>
-            <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
+            <div className="sm:max-w-4xl md:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
               <h2 className="text-xl font-sans font-bold">My Documents</h2>
               <button className="btn btn-ghost btn-circle">
                 <FcFolder size={28} />
@@ -134,7 +138,7 @@ export default function Dashboard() {
       {documents.length > 0 && (
         <>
           <section>
-            <div className="sm:max-w-4xl sm:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
+            <div className="sm:max-w-4xl md:mx-auto mx-3 relative mt-10 px-5 py-1 rounded-lg items-center flex justify-between bg-neutral ">
               <h2 className="text-xl font-sans font-bold">My Documents</h2>
               <button className="btn btn-ghost btn-circle">
                 <FcFolder size={28} />
@@ -154,3 +158,7 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
+
+

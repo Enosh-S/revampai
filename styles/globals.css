@@ -5,18 +5,18 @@
 @layer components {
     .sidebar-icon {
       @apply relative flex items-center justify-center 
-      h-12 w-40 mt-1 mb-1 ml-2 px-3
-     hover:bg-[#1b263b]
-    text-primary
-      hover:rounded-md rounded-xl
-      transition-all duration-300 ease-linear
-      cursor-pointer shadow-lg ;
+    h-12 w-12 mt-2 mb-2  
+  bg-gray-400 hover:bg-primary dark:bg-base-100/50
+  text-primary hover:text-slate-800
+    hover:rounded-xl rounded-2xl
+    transition-all duration-300 ease-linear
+    cursor-pointer shadow-md ;
     }
     
   
     .sidebar-hr {
       @apply bg-gray-200 dark:bg-[#1b263b]
-      border border-gray-200 dark:border-[#1b263b] rounded-full
-      mx-2;
+      border border-gray-200 dark:border-slate-700 rounded-full
+      mx-1;
     }
   }

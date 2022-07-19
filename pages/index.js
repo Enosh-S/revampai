@@ -4,11 +4,7 @@ import { getSession, useSession } from "next-auth/react";
 
 
 
-
-
 export default function Home() {
- 
-
   return (
     <div>
       <Head>
@@ -19,10 +15,17 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Dashboard/>
+      
+      
+      <Dashboard />
+      
+      
     </div>
   );
 }
+
+
+
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
